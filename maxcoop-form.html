@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAXCOOP - Coop City Anambra Subscription Form</title>
+    <link rel="stylesheet" href="maxcoop-form.css">
+    
+    <!-- jsPDF Library for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    
+    <!-- PDF Generator (customizable) -->
+    <script src="pdf-generator.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <div class="logos">
+                <img src="maxcoop-logo.jpg" alt="MAXCOOP" class="logo-image">
+                <img src="m-logo.jpg" alt="M" class="logo-image">
+                <img src="coop-city-logo.jpg" alt="COOP CITY ANAMBRA" class="logo-image">
+            </div>
+            <div class="photo-box">
+                <div id="photoPreview" class="photo-preview">
+                    <p class="photo-placeholder">UPLOAD<br>PASSPORT<br>PHOTO</p>
+                    <img id="passportImage" style="display: none;" alt="Passport">
+                </div>
+                <input type="file" id="passportUpload" accept="image/*" style="display: none;">
+                <button type="button" class="upload-btn" onclick="document.getElementById('passportUpload').click()">📷 Upload Photo</button>
+            </div>
+        </div>
+
+        <!-- Hero Image Section -->
+        <div class="hero-section" style="background-image: url('hero-background.png');">
+            <div class="hero-overlay">
+                <div class="hero-text">
+                    <h2>COOP CITY, ANAMBRA</h2>
+                    <p>Building Dreams, Creating Communities</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="form-title">
+            <h1><span class="subtitle">----- SUBSCRIPTION FORM -----</span></h1>
+        </div>
+
+        <!-- MAXCOOP Company Description -->
+        <div class="company-description">
+            <div class="company-header">
+                <h2>ABOUT MAX CONSTRUCTION HOUSING COOPERATIVE</h2>
+            </div>
+            <div class="company-content">
+                <p>
+                    <strong>MAX CONSTRUCTION HOUSING COOPERATIVE</strong> is a reputable real estate development company dedicated to creating 
+                    sustainable and modern residential estates across Nigeria. With a proven track record in property development, 
+                    we specialize in transforming strategic land locations into thriving communities that offer both comfort and 
+                    excellent investment returns.
+                </p>
+                <p>
+                    Our COOP CITY, ANAMBRA project is strategically located in Ozubulu, Anambra State, offering investors prime 
+                    land with proper documentation, proximity to major landmarks, and a well-planned infrastructure that guarantees 
+                    appreciation over time.
+                </p>
+            </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+            <div class="spinner"></div>
+            <p>Generating your PDF... Please wait...</p>
+        </div>
+
+        <form id="maxcoopForm" class="subscription-form">
+            <!-- SECTION 1: SUBSCRIBER'S DETAILS -->
+            <div class="section-header">SECTION 1: SUBSCRIBER'S DETAILS</div>
+            <p class="instruction">Please complete all fields in block letters. Fields marked with asterisks (*) are mandatory. Tick boxes where appropriate.</p>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>NAME*</label>
+                    <div class="name-title">
+                        <label><input type="checkbox" name="title" value="MR"> MR</label>
+                        <label><input type="checkbox" name="title" value="MRS"> MRS</label>
+                        <label><input type="checkbox" name="title" value="MISS"> MISS</label>
+                    </div>
+                    <input type="text" name="surname" class="block-input" placeholder="Surname" required><br />
+                    <input type="text" name="otherNames" class="block-input" placeholder="Other Names" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>NAME OF SPOUSE <span class="small-text">(If Applicable)</span></label>
+                    <input type="text" name="spouseSurname" class="block-input" placeholder="Surname"><br />
+                    <input type="text" name="spouseOtherNames" class="block-input" placeholder="Other Names">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>ADDRESS*</label>
+                    <input type="text" name="address" class="block-input" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>DATE OF BIRTH*</label>
+                    <input type="date" name="dob" required>
+                </div>
+                <div class="form-group half-width">
+                    <label>GENDER*</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="gender" value="MALE" required> MALE</label>
+                        <label><input type="radio" name="gender" value="FEMALE" required> FEMALE</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>MARITAL STATUS*</label>
+                    <select name="maritalStatus" required>
+                        <option value="">Select...</option>
+                        <option value="SINGLE">Single</option>
+                        <option value="MARRIED">Married</option>
+                        <option value="DIVORCED">Divorced</option>
+                        <option value="WIDOWED">Widowed</option>
+                    </select>
+                </div>
+                <div class="form-group half-width">
+                    <label>NATIONALITY*</label>
+                    <input type="text" name="nationality" value="Nigerian" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>OCCUPATION*</label>
+                    <input type="text" name="occupation" required>
+                </div>
+                <div class="form-group half-width">
+                    <label>EMPLOYER'S NAME</label>
+                    <input type="text" name="employerName">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>NATURE OF BUSINESS</label>
+                    <input type="text" name="businessNature">
+                </div>
+                <div class="form-group half-width">
+                    <label>YEARS OF EMPLOYMENT/BUSINESS</label>
+                    <input type="number" name="yearsOfEmployment" min="0">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>COUNTRY OF RESIDENCE*</label>
+                    <input type="text" name="countryOfResidence" value="Nigeria" required>
+                </div>
+                <div class="form-group half-width">
+                    <label>LANGUAGE SPOKEN</label>
+                    <input type="text" name="languageSpoken" value="English">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>EMAIL ADDRESS*</label>
+                    <input type="email" name="email" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>OTHER SOURCE OF INCOME (IF ANY)</label>
+                    <input type="text" name="otherIncome">
+                </div>
+                <div class="form-group half-width">
+                    <label>MOBILE NUMBER*</label>
+                    <input type="tel" name="mobileNumber" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>ARE YOU A POLITICALLY EXPOSED PERSON?*</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="pep" value="YES" required> YES</label>
+                        <label><input type="radio" name="pep" value="NO" required> NO</label>
+                    </div>
+                </div>
+                <div class="form-group half-width">
+                    <label>IF YES, what category?</label>
+                    <input type="text" name="pepCategory">
+                </div>
+            </div>
+
+            <!-- SECTION 2: DOCUMENTS UPLOADS -->
+            <div class="section-header">SECTION 2: DOCUMENTS UPLOADS</div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>IDENTIFICATION CARD TYPE:*</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="idType" value="NATIONAL_ID" onchange="toggleIdUpload('NATIONAL_ID')"> National ID Card</label>
+                        <label><input type="checkbox" name="idType" value="DRIVERS_LICENCE" onchange="toggleIdUpload('DRIVERS_LICENCE')"> Driver's Licence</label>
+                        <label><input type="checkbox" name="idType" value="INTERNATIONAL_PASSPORT" onchange="toggleIdUpload('INTERNATIONAL_PASSPORT')"> International Passport</label>
+                        <label><input type="checkbox" name="idType" value="NIN" onchange="toggleIdUpload('NIN')"> NIN</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ID Upload Sections -->
+            <div id="upload_NATIONAL_ID" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD NATIONAL ID CARD*</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_NATIONAL_ID" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_NATIONAL_ID').click()">
+                                📎 Upload National ID
+                            </button>
+                            <div id="preview_NATIONAL_ID" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_DRIVERS_LICENCE" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD DRIVER'S LICENCE*</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_DRIVERS_LICENCE" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_DRIVERS_LICENCE').click()">
+                                📎 Upload Driver's Licence
+                            </button>
+                            <div id="preview_DRIVERS_LICENCE" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_INTERNATIONAL_PASSPORT" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD INTERNATIONAL PASSPORT*</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_INTERNATIONAL_PASSPORT" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_INTERNATIONAL_PASSPORT').click()">
+                                📎 Upload International Passport
+                            </button>
+                            <div id="preview_INTERNATIONAL_PASSPORT" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_NIN" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD NIN DOCUMENT*</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_NIN" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_NIN').click()">
+                                📎 Upload NIN
+                            </button>
+                            <div id="preview_NIN" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OTHER DOCUMENTS FOR INDIVIDUAL/PROPRIETARY FIRM -->
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>OTHER DOCUMENT REQUIREMENT FOR INDIVIDUAL / PROPRIETARY FIRM (Any two):</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="otherDocs" value="INDIVIDUAL_INTERNATIONAL_PASSPORT" onchange="toggleDocUpload('INDIVIDUAL_INTERNATIONAL_PASSPORT')"> International Passport</label>
+                        <label><input type="checkbox" name="otherDocs" value="INDIVIDUAL_VOTER_ID" onchange="toggleDocUpload('INDIVIDUAL_VOTER_ID')"> Voter ID Card</label>
+                        <label><input type="checkbox" name="otherDocs" value="INDIVIDUAL_DRIVING_LICENSE" onchange="toggleDocUpload('INDIVIDUAL_DRIVING_LICENSE')"> Driving License</label>
+                        <label><input type="checkbox" name="otherDocs" value="INDIVIDUAL_PASSPORT_PHOTOS" onchange="toggleDocUpload('INDIVIDUAL_PASSPORT_PHOTOS')"> Passport photographs</label>
+                        <label><input type="checkbox" name="otherDocs" value="INDIVIDUAL_CERT_REGISTRATION" onchange="toggleDocUpload('INDIVIDUAL_CERT_REGISTRATION')"> Certificate of Registration</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload sections for Individual docs -->
+            <div id="upload_INDIVIDUAL_INTERNATIONAL_PASSPORT" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD INTERNATIONAL PASSPORT</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_INDIVIDUAL_INTERNATIONAL_PASSPORT" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_INDIVIDUAL_INTERNATIONAL_PASSPORT').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_INDIVIDUAL_INTERNATIONAL_PASSPORT" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_INDIVIDUAL_VOTER_ID" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD VOTER ID CARD</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_INDIVIDUAL_VOTER_ID" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_INDIVIDUAL_VOTER_ID').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_INDIVIDUAL_VOTER_ID" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_INDIVIDUAL_DRIVING_LICENSE" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD DRIVING LICENSE</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_INDIVIDUAL_DRIVING_LICENSE" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_INDIVIDUAL_DRIVING_LICENSE').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_INDIVIDUAL_DRIVING_LICENSE" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_INDIVIDUAL_PASSPORT_PHOTOS" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD PASSPORT PHOTOGRAPHS</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_INDIVIDUAL_PASSPORT_PHOTOS" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_INDIVIDUAL_PASSPORT_PHOTOS').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_INDIVIDUAL_PASSPORT_PHOTOS" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_INDIVIDUAL_CERT_REGISTRATION" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD CERTIFICATE OF REGISTRATION</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_INDIVIDUAL_CERT_REGISTRATION" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_INDIVIDUAL_CERT_REGISTRATION').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_INDIVIDUAL_CERT_REGISTRATION" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OTHER DOCUMENTS FOR COMPANY -->
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>OTHER DOCUMENT REQUIREMENT FOR COMPANY:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="otherDocs" value="COMPANY_CERT_INCORPORATION" onchange="toggleDocUpload('COMPANY_CERT_INCORPORATION')"> Certificate of Incorporation</label>
+                        <label><input type="checkbox" name="otherDocs" value="COMPANY_MEMORANDUM" onchange="toggleDocUpload('COMPANY_MEMORANDUM')"> Memorandum of Association</label>
+                        <label><input type="checkbox" name="otherDocs" value="COMPANY_ARTICLES" onchange="toggleDocUpload('COMPANY_ARTICLES')"> Articles of Association</label>
+                        <label><input type="checkbox" name="otherDocs" value="COMPANY_VALID_ID" onchange="toggleDocUpload('COMPANY_VALID_ID')"> Valid Means of Identification</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload sections for Company docs -->
+            <div id="upload_COMPANY_CERT_INCORPORATION" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD CERTIFICATE OF INCORPORATION</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_COMPANY_CERT_INCORPORATION" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_COMPANY_CERT_INCORPORATION').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_COMPANY_CERT_INCORPORATION" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_COMPANY_MEMORANDUM" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD MEMORANDUM OF ASSOCIATION</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_COMPANY_MEMORANDUM" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_COMPANY_MEMORANDUM').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_COMPANY_MEMORANDUM" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_COMPANY_ARTICLES" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD ARTICLES OF ASSOCIATION</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_COMPANY_ARTICLES" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_COMPANY_ARTICLES').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_COMPANY_ARTICLES" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_COMPANY_VALID_ID" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD VALID MEANS OF IDENTIFICATION</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_COMPANY_VALID_ID" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_COMPANY_VALID_ID').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_COMPANY_VALID_ID" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OTHER DOCUMENTS FOR FOUNDATIONS -->
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>OTHER DOCUMENT REQUIREMENT FOR FOUNDATIONS:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="otherDocs" value="FOUNDATION_CERT_REGISTRATION" onchange="toggleDocUpload('FOUNDATION_CERT_REGISTRATION')"> Certificate of Registration</label>
+                        <label><input type="checkbox" name="otherDocs" value="FOUNDATION_TRUSTEES_PHOTOS" onchange="toggleDocUpload('FOUNDATION_TRUSTEES_PHOTOS')"> Passport photographs of Trustees</label>
+                        <label><input type="checkbox" name="otherDocs" value="FOUNDATION_TRUSTEE_ID" onchange="toggleDocUpload('FOUNDATION_TRUSTEE_ID')"> Valid ID of at least one Trustee</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload sections for Foundation docs -->
+            <div id="upload_FOUNDATION_CERT_REGISTRATION" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD CERTIFICATE OF REGISTRATION</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_FOUNDATION_CERT_REGISTRATION" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_FOUNDATION_CERT_REGISTRATION').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_FOUNDATION_CERT_REGISTRATION" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_FOUNDATION_TRUSTEES_PHOTOS" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD PASSPORT PHOTOGRAPHS OF TRUSTEES</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_FOUNDATION_TRUSTEES_PHOTOS" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_FOUNDATION_TRUSTEES_PHOTOS').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_FOUNDATION_TRUSTEES_PHOTOS" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_FOUNDATION_TRUSTEE_ID" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD VALID ID OF AT LEAST ONE TRUSTEE</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_FOUNDATION_TRUSTEE_ID" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_FOUNDATION_TRUSTEE_ID').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_FOUNDATION_TRUSTEE_ID" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OTHER DOCUMENTS FOR PARTNERSHIP FIRM -->
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>OTHER DOCUMENT REQUIREMENT FOR PARTNERSHIP FIRM:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="otherDocs" value="PARTNERSHIP_CERT_REGISTRATION" onchange="toggleDocUpload('PARTNERSHIP_CERT_REGISTRATION')"> Certificate of Registration</label>
+                        <label><input type="checkbox" name="otherDocs" value="PARTNERSHIP_PARTNERS_PHOTOS" onchange="toggleDocUpload('PARTNERSHIP_PARTNERS_PHOTOS')"> Passport photographs of Partners</label>
+                        <label><input type="checkbox" name="otherDocs" value="PARTNERSHIP_DEED" onchange="toggleDocUpload('PARTNERSHIP_DEED')"> Partnership deed</label>
+                        <label><input type="checkbox" name="otherDocs" value="PARTNERSHIP_VALID_ID" onchange="toggleDocUpload('PARTNERSHIP_VALID_ID')"> Valid means of identification</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload sections for Partnership docs -->
+            <div id="upload_PARTNERSHIP_CERT_REGISTRATION" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD CERTIFICATE OF REGISTRATION</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_PARTNERSHIP_CERT_REGISTRATION" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_PARTNERSHIP_CERT_REGISTRATION').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_PARTNERSHIP_CERT_REGISTRATION" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_PARTNERSHIP_PARTNERS_PHOTOS" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD  PASSPORT PHOTOGRAPHS OF PARTNERS</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_PARTNERSHIP_PARTNERS_PHOTOS" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_PARTNERSHIP_PARTNERS_PHOTOS').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_PARTNERSHIP_PARTNERS_PHOTOS" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_PARTNERSHIP_DEED" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD PARTNERSHIP DEED</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_PARTNERSHIP_DEED" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_PARTNERSHIP_DEED').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_PARTNERSHIP_DEED" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="upload_PARTNERSHIP_VALID_ID" class="id-upload-section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label>UPLOAD VALID MEANS OF IDENTIFICATION</label>
+                        <div class="file-upload-container">
+                            <input type="file" id="file_PARTNERSHIP_VALID_ID" accept="image/*,application/pdf" style="display: none;">
+                            <button type="button" class="upload-btn-secondary" onclick="document.getElementById('file_PARTNERSHIP_VALID_ID').click()">
+                                📎 Upload Document
+                            </button>
+                            <div id="preview_PARTNERSHIP_VALID_ID" class="file-preview"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Salary Range -->
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>SALARY RANGE*</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="salaryRange" value="0-500K"> ₦0 – ₦500,000</label>
+                        <label><input type="checkbox" name="salaryRange" value="600K-1M"> ₦600,000 – ₦1,000,000</label>
+                        <label><input type="checkbox" name="salaryRange" value="1M-5M"> ₦1,000,000 – ₦5,000,000</label>
+                        <label><input type="checkbox" name="salaryRange" value="OVER_5M"> Over ₦5,000,000</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 3: NEXT OF KIN -->
+            <div class="section-header">SECTION 3: NEXT OF KIN</div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>NAME*</label>
+                    <input type="text" name="nokName" required>
+                </div>
+                <div class="form-group half-width">
+                    <label>PHONE NUMBER*</label>
+                    <input type="tel" name="nokPhone" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>EMAIL ADDRESS</label>
+                    <input type="email" name="nokEmail">
+                </div>
+                <div class="form-group half-width">
+                    <label>ADDRESS*</label>
+                    <textarea name="nokAddress" rows="2" required></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION 4: PLOTS AND PAYMENT PLAN -->
+            <div class="section-header">SECTION 4: PLOTS AND PAYMENT PLAN</div>
+            
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>TYPE OF PLOT:*</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="plotType" value="RESIDENTIAL" required> Residential</label>
+                        <label><input type="checkbox" name="plotType" value="COMMERCIAL"> Commercial (attracts 20%)</label>
+                    </div>
+                </div>
+                <div class="form-group half-width">
+                    <label>NUMBER OF PLOTS*</label>
+                    <input type="number" name="numberOfPlots" min="1" value="1" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>PLOT SIZE:*</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="plotSize" value="464SQM" required> 464 SQM</label>
+                        <label><input type="checkbox" name="cornerPiece" value="YES"> Corner piece of plot(s) (attracts 10%) of land cost</label>
+                    </div>
+                </div>
+                <div class="form-group half-width">
+                    <label>PAYMENT PLAN:*</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="paymentPlan" value="3_MONTHS" required> 3 Months</label>
+                        <label><input type="checkbox" name="paymentPlan" value="6_MONTHS"> 6 Months</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label>PROPOSED TIMELINE TO COMMENCE BUILDING/DEVELOPMENT:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="buildingTimeline" value="6_MONTHS"> 6 Months</label>
+                        <label><input type="checkbox" name="buildingTimeline" value="1_YEAR"> 1 Year</label>
+                        <label><input type="checkbox" name="buildingTimeline" value="2_YEARS"> 2 Years</label>
+                        <label><input type="checkbox" name="buildingTimeline" value="3_YEARS"> 3 Years</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>SIGNATURE (Type Full Name)*</label>
+                    <input type="text" name="signature" placeholder="Type your full name" required>
+                </div>
+                <div class="form-group half-width">
+                    <label>DATE*</label>
+                    <input type="date" name="declarationDate" required>
+                </div>
+            </div>
+
+            <!-- SECTION 5: FOR REFERRAL DETAILS -->
+            <div class="section-header">SECTION 5: FOR REFERRAL DETAILS (Optional)</div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>REFERRAL NAME</label>
+                    <input type="text" name="referralName">
+                </div>
+                <div class="form-group half-width">
+                    <label>REFERRAL PHONE</label>
+                    <input type="tel" name="referralPhone">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>REFERRAL EMAIL</label>
+                    <input type="email" name="referralEmail">
+                </div>
+                <div class="form-group half-width">
+                    <label>REFERRAL DATE</label>
+                    <input type="date" name="referralDate">
+                </div>
+            </div>
+
+            <!-- SECTION 6: SUBSCRIBER BANK DETAILS -->
+            <div class="section-header">SECTION 6: SUBSCRIBER'S BANK DETAILS</div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>BANK ACCOUNT NUMBER*</label>
+                    <input type="text" name="bankAccountNumber" required>
+                </div>
+                <div class="form-group half-width">
+                    <label>ACCOUNT NAME*</label>
+                    <input type="text" name="accountName" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group half-width">
+                    <label>BANK NAME*</label>
+                    <input type="text" name="bankName" required>
+                </div>
+                <div class="form-group half-width">
+                    <label>RC NO. (If Corporate)</label>
+                    <input type="text" name="rcNumber">
+                </div>
+            </div>
+
+        <!-- TIPS TO NOTE ABOUT MAXCOOP -->
+        <div class="faq-section">
+            <div class="faq-header">
+                <h2>📋 SECTION B - TIPS TO NOTE ABOUT MAXCOOP</h2>
+                <p class="faq-subtitle">Click on any question to view the answer</p>
+            </div>
+
+            <div class="accordion">
+                <!-- Q1 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q1.</span>
+                        <span class="question-text">WHERE IS COOP CITY, ANAMBRA LOCATED?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>COOP CITY, ANAMBRA is a prime piece of land situated and lying at Ozubulu, Anambra State. Applicants or their representatives are advised to inspect the site as the company shall not be held liable for claims/issues arising from clients' failure to inspect the said property before purchase. Free inspections hold Mondays to Saturdays, from 10 a.m., and Sundays on special arrangement.</p>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q2.</span>
+                        <span class="question-text">WHY SHOULD I BUY COOP CITY, ANAMBRA?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>COOP CITY, ANAMBRA enjoys proximity to major commercial investments and landmarks, such as Pentecost University, University Teaching Hospital, Rojenny Stadium and many more guaranteeing high returns on investment.</p>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q3.</span>
+                        <span class="question-text">WHO ARE THE OWNERS/DEVELOPERS OF COOP CITY, ANAMBRA?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>COOP CITY, ANAMBRA is owned and developed by MAX CONSTRUCTION HOUSING COOPERATIVE.</p>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q4.</span>
+                        <span class="question-text">WHAT TYPE OF TITLE DOES COOP CITY, ANAMBRA HAVE?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Survey and Deed of Assignment. The company has the long-term responsibility to ensure/facilitate further perfection of the estate's title subject to subscribers' payment of title perfection fees to be determined and communicated at a future date.</p>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q5.</span>
+                        <span class="question-text">ARE THERE ANY ENCUMBRANCES ON THE LAND?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>The land is free from every known government acquisition or interests, and adverse claims.</p>
+                    </div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q6.</span>
+                        <span class="question-text">WHAT IS THE PAYMENT PLAN?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p><strong>A.</strong> Outright payment of ₦2,500,000 only per 464sqm within the first three (3) months, with a minimum deposit of ₦500,000 per plot.</p>
+                        <p><strong>N.B:</strong> The Company reserves the right to repudiate, void or defer/transfer processing of transactions that violate the initial deposit threshold or payments that are made after the official announcement of close of sales. Payment validates subscription even if date on subscription form is earlier than the date of payment.</p>
+                        <p><strong>B.</strong> 12 months installment payment can be arranged, and attracts additional charges of 20%.</p>
+                        <p><strong>N.B:</strong> Non-payment of the monthly installments as at when due shall be treated as a fundamental breach of the contract, which shall result in termination or revocation of the contract; or attract default charge of 10% of the monthly payment. The company reserves the right to review number of plots purchased in the event of payment default after the company has sent two (2) consecutive notices to subscriber.</p>
+                    </div>
+                </div>
+
+                <!-- Q7 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q7.</span>
+                        <span class="question-text">WHAT IS THE SIZE OF THE PLOT?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>464SQM</p>
+                    </div>
+                </div>
+
+                <!-- Q8 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q8.</span>
+                        <span class="question-text">IS THE ROAD TO THE ESTATE MOTOR-ABLE?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes.</p>
+                    </div>
+                </div>
+
+                <!-- Q9 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q9.</span>
+                        <span class="question-text">WHAT OTHER PAYMENTS DO I MAKE ASIDE THE PAYMENT FOR THE LAND?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <ul>
+                            <li><strong>Deed of Assignment:</strong> ₦100,000 only per plot (subject to review upwards)</li>
+                            <li><strong>Registered Survey Fee:</strong> ₦300,000 only per plot (Survey Plan with company name attracts extra charges, subject to review upwards)</li>
+                            <li><strong>Plot Demarcation Fee:</strong> ₦100,000 only per plot (subject to review upwards)</li>
+                            <li><strong>Development Levy:</strong> ₦500,000 only per plot (subjected to review upwards). Developmental fee covers the following:
+                                <ul>
+                                    <li>i. Perimeter fencing</li>
+                                    <li>ii. Gate house</li>
+                                    <li>iii. Earth Road</li>
+                                    <li>iv. Infrastructure Fee: To be determined later (Drainage construction; electrification; good road network; security and special amenities)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p><strong>N.B:</strong> Development fee unpaid within 12 months of allocation will attract 2.5% monthly appreciation value due to rising costs of building materials. Also, where plots are unavailable at the time of subscription/payment, one can be transferred to a new phase.</p>
+                    </div>
+                </div>
+
+                <!-- Q10 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q10.</span>
+                        <span class="question-text">WHEN DO I MAKE THE OTHER PAYMENTS?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>(i) Deed of Assignment, provisional Survey and Plot Demarcation payments can be made immediately before physical allocation.</p>
+                        <p>(ii) Development fee can be made either outright or on installments after physical allocation of plot. However, installment payment will attract surcharge.</p>
+                    </div>
+                </div>
+
+                <!-- Q11 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q11.</span>
+                        <span class="question-text">WHAT DO I GET AFTER THE INITIAL DEPOSIT AND FOR FURTHER INSTALLMENTS?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>A letter of acknowledgment of subscription, receipt of payment and/or provisional allocation letter for initial deposit; and installment payment receipts for further installments. There are regular estate updates for customers to follow the company on its social media handles.</p>
+                    </div>
+                </div>
+
+                <!-- Q12 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q12.</span>
+                        <span class="question-text">WHAT DO I GET AFTER COMPLETING PAYMENT FOR THE LAND?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>(a) Completion Payment Receipt, Allocation Notification Letter, Contract of Sales and Plot Allocation Document</p>
+                        <p>(b) Deed of Assignment & Survey Plan after physical allocation is done. Allocation document would be issued within three (3) months after payment and physical allocation exercise is carried out. However, this is subject to confirmation of 50% payment of development fees. The company reserves the right to allocate subscribers to a new and nearby scheme/phase of the estate.</p>
+                    </div>
+                </div>
+
+                <!-- Q13 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q13.</span>
+                        <span class="question-text">CAN I START CONSTRUCTION OR BUILDING ON THE LAND IMMEDIATELY?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>You can start building on the land after physical allocation provided development fee has been paid. Fencing & Gatehouse would be constructed within the first year of introducing the estate, while other infrastructure will commence from the second year with regard to the general level of development in the area, satisfactory evidence of possession of plots by subscriber and payment of development fee.</p>
+                    </div>
+                </div>
+
+                <!-- Q14 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q14.</span>
+                        <span class="question-text">IS THERE A TIME LIMIT TO COMMENCE WORK ON MY LAND AFTER ALLOCATION?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes. There must be evidence of active possession on your land within six months of physical allocation i.e fencing of plot(s). Where an allocated plot is not fenced within the stipulated timeframe, the company reserves the right to reallocate subscriber to another part of the estate.</p>
+                    </div>
+                </div>
+
+                <!-- Q15 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q15.</span>
+                        <span class="question-text">IS THERE ANY RESTRICTION REGARDING THE TYPE OF BUILDING I CAN CONSTRUCT?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes. The estate layout is in sections, and you are expected to build in conformity with the required setback, building control and designated plan for that section (commercial or residential i.e., bungalow, block of flats or detached houses (duplex).</p>
+                        <p><strong>Note:</strong> Face-me-I-face-you (tenement building) and high-rise houses will not be approved by the company and the Anambra State Government.</p>
+                    </div>
+                </div>
+
+                <!-- Q16 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q16.</span>
+                        <span class="question-text">CAN I RE-SELL MY PLOT/PROPERTY?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>A. Yes. Subscribers who have paid for their land in full can re-sell their plot(s). In that event, Max Construction and Building Corporation would require the seller to furnish the company details of the new buyer. Max coop does not sell on behalf of subscribers.</p>
+                        <p>B. A charge of 10% of the land consideration (covering transfer documentation fee) shall be paid to the company by the buyer.</p>
+                    </div>
+                </div>
+
+                <!-- Q17 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q17.</span>
+                        <span class="question-text">CAN I PAY CASH TO YOUR AGENT?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>No, cash payments should ONLY be made to Max coop and Building corporate at its designated banks. Otherwise, cheque(s) should be issued in favour of Max Construction and Building Corporation. We shall not take responsibility for any liability that may arise as a result of deviation from the above instruction.</p>
+                    </div>
+                </div>
+
+                <!-- Q18 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q18.</span>
+                        <span class="question-text">WHAT HAPPENS IF I CANNOT CONTINUE WITH MY PAYMENT? CAN I REQUEST A REFUND?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes, you can apply for refund only if you have NOT been allocated your plot(s). In the event of a refund, you are required to give the company ninety (90) days' notice to process your request and a further sixty (60) days if the process isn't completed after the first 90 days. The refund shall be processed and paid less 40% (administrative fee, logistics, agency fee and others).</p>
+                    </div>
+                </div>
+
+                <!-- Q19 -->
+                <div class="accordion-item">
+                    <button class="accordion-button" type="button">
+                        <span class="question-number">Q19.</span>
+                        <span class="question-text">IS MAX CONSTRUCTION AND MAXCOOP AML/CFT COMPLIANT?</span>
+                        <span class="accordion-icon">▼</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIPS CONFIRMATION CHECKBOX -->
+            <div class="tips-confirmation">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="tipsRead" id="tipsRead" required>
+                    <span>✓ I CONFIRM that I have read and understood all the TIPS TO NOTE ABOUT MAXCOOP above</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Point of Sale Offices -->
+        <div class="pos-offices">
+            <div class="pos-header">
+                <h3>📍 OUR OFFICES - POINT OF SALE LOCATIONS</h3>
+                <p><strong><center>Choose your point of Sale Location and Make your payment</center></strong></p>
+            </div>
+            
+            <!-- OFFICE SELECTION -->
+            <div class="office-selection">
+                <label class="office-select-label">SELECT THE OFFICE WHERE PURCHASE WAS MADE:*</label>
+                <div class="office-checkboxes">
+                    <label class="office-checkbox">
+                        <input type="checkbox" name="officeLocation" value="PWAN_MAX_NNEWI">
+                        <span>🏢 PWAN MAX NNEWI</span>
+                    </label>
+                    <label class="office-checkbox">
+                        <input type="checkbox" name="officeLocation" value="PWAN_MAX_AWKA">
+                        <span>🏢 PWAN MAX AWKA</span>
+                    </label>
+                    <label class="office-checkbox">
+                        <input type="checkbox" name="officeLocation" value="PWAN_MAX_CENTRAL">
+                        <span>🏢 PWAN MAX CENTRAL</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="offices-grid"> 
+                <div class="office-card">
+                   <p><h4>🏢 PWAN MAX NNEWI: </h4>1ST FLOOR, EDOZIE/EMEKENYA OPP POLARIS BANK, BANK ROAD, NNEWI, ANAMBRA STATE</p>
+                  <p><h4>🏢 PWAN MAX AWKA OFFICE:</h4> 1ST FLOOR, GRACE ANNE FAITH HOUSE BEHIND BANK, UNIZIK/NAWGU ROAD, EXPRESSWAY AWKA, ANAMBRA STATE</p>
+                   <p><h4>🏢 PWAN MAX CENTRAL:</h4>NO 207 UGWUNABANKPA ROAD, BEHIND MAINLAND FILLING STATION, RIVERS JUNCTION, ONITSHA</p>
+                </div>
+                <div class="account-info">
+                    <img src="polaris bank logo.png" alt="Bank Logo" class="qr-code" align="right">
+                    <p><strong>PAYMENT DETAILS</strong></p>
+                    <p><h1>MAX CONSTRUCTION <br />HOUSING COOP</h1></p>
+                    <p><b>Account Number: </b><strong><h1>5402057281</h1></strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUBSCRIBER'S DECLARATION -->
+        <div class="section-header">SUBSCRIBER'S DECLARATION</div>
+
+        <div class="declaration-text">
+            <p>I <input type="text" name="affirmationName" class="inline-input" placeholder="Type your full name here" required> hereby affirm that all information provided as a requirement for the purchase of the Coop City, Anambra state, situated at Ozubulu, Anambra state is true and any false or inaccurate information given by me may decline my application.</p>
+            
+            <div class="affirmation-checkbox">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="agreeToTerms" required>
+                    <span>I agree to the terms and conditions stated above and affirm that all information provided is accurate and true.</span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-row">
+            <button type="submit" class="submit-btn">📧 GENERATE PDF & SEND</button>
+        </div>
+
+        <p class="form-note">* PDF will be generated and your Gmail will open automatically. Just add the PDF as an attachment and send to <strong>maxcoopforms@gmail.com</strong></p>
+        </form>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 MAX CONSTRUCTION HOUSING COOPERATIVE | COOP CITY, ANAMBRA</p>
+            <p>For inquiries: maxcoopforms@gmail.com</p>
+        </div>
+    </div>
+
+    <!-- Load Form JavaScript -->
+    <script src="maxcoop-form.js"></script>
+</body>
+</html>
